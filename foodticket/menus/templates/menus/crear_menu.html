@@ -1,0 +1,48 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <div class="container mt-5">
+        <div class="col-md-4 offset-md-3">
+            <div class="row">
+                <h1>Crea tu Menú</h1>
+                <p>{{ error }}</p>
+                {% comment "" %} enctype="multipart/form-data" es muy importante ya que nos permite recibir imagenes en el form{% endcomment %}
+                <form action="{% url 'menus:crear_menu' %}" method="POST" enctype="multipart/form-data" class="card card-body">
+                    {% csrf_token %}
+                    <div class='row'>
+                        <div>
+                            {% for field in form.visible_fields %}
+                                {% if field.field.widget.input_type != 'checkbox' %}
+                                    <div class="m-2">
+                                        <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                        {{ field }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="row g-2">
+                            {% for field in form.visible_fields %}
+                                    {% if field.field.widget.input_type == 'checkbox' %}
+                                        <div class="col-5 m-2">
+                                            {{ field }}
+                                            <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                        </div>
+                                    {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="mt-1">
+                        <label class="form-check-label" for="diario">Diario</label>
+                        <input type="checkbox" name="diario" class="form-check-input">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-outline-warning mt-4">Crear</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock  %}

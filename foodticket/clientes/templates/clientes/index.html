@@ -1,0 +1,32 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    {% if request.user.is_authenticated %}
+        <div class="container mt-5">
+            <div class="mt-5">
+                <h1>Clientes</h1>
+                <a href="{% url 'clientes:compra' %}" class="btn btn-lg btn-outline-warning mt-3 me-2">Vender almuerzo</a>
+                <a href="{% url 'clientes:venta' %}" class="btn btn-lg btn-outline-warning mt-3 me-2">Vender tiquetera </a>
+
+                {% block content_clientes %}
+                {% endblock  %}
+            </div>
+        </div>
+    {% else %}
+        <div class="container mt-5">
+            <div class="mt-5">
+                <h1>Clientes</h1>
+
+                <form action="{% url 'clientes:informacion_cliente' %}" method="POST" class="card card-body">
+                    {% csrf_token %}
+                    {{formulario_compra.as_p}}
+                    <input type="submit" value="Seleccionar" class="btn btn-lg btn-outline-warning mt-3 me-2">
+                </form>
+
+            </div>
+        </div>
+    {% endif %}
+</main>
+{% endblock content %}

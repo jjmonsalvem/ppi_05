@@ -1,0 +1,95 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <div class="container mt-5">
+        <div class="col-md-6">
+            <h1>Tus Menús</h1>
+            <a href="{% url 'menus:crear_menu' %}" class="btn btn-lg btn-outline-warning mt-4">
+                <span>Crear Menú</span>
+            </a>
+        </div>
+        
+        {% if request.user %}
+        <div class="row row-cols-4 mt-2 gy-4">
+            {% if menus_restaurante %}
+                    {% for menu in menus_restaurante %}
+                        <div class="col">
+                            <div class="card" style="width: 18rem">
+                                <img src="{{ MEDIA_URL }}{{ menu.imagen.url }}" class="card-img-top" alt="menu" width="200" height="200">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ menu.nombre }}</h5>
+                                    <div class="overflow-hidden" style="height: 8rem">
+                                        <p class="card-text h-25">{{ menu.descripcion }}</p>
+                                    </div>
+                                    <div class="row row-cols-4">
+                                        <p class="col card-text">L: 
+                                            {% if menu.lunes %}
+                                                <input class="form-check-input" type="checkbox" checked disabled>
+                                            {% else %}
+                                                <input class="form-check-input" type="checkbox" disabled>
+                                            {% endif %}
+                                        </p>
+                                        <p class="col card-text">M: 
+                                            {% if menu.martes %}
+                                                <input class="form-check-input" type="checkbox" checked disabled>
+                                            {% else %}
+                                                <input class="form-check-input" type="checkbox" disabled>
+                                            {% endif %}
+                                        </p>
+                                        <p class="col card-text">M: 
+                                            {% if menu.miercoles %}
+                                                <input class="form-check-input" type="checkbox" checked disabled>
+                                            {% else %}
+                                                <input class="form-check-input" type="checkbox" disabled>
+                                            {% endif %}
+                                        </p>
+                                        <p class="col card-text">J: 
+                                            {% if menu.jueves %}
+                                                <input class="form-check-input" type="checkbox" checked disabled>
+                                            {% else %}
+                                                <input class="form-check-input" type="checkbox" disabled>
+                                            {% endif %}
+                                        </p>
+                                        <p class="col card-text">V: 
+                                            {% if menu.viernes %}
+                                                <input class="form-check-input" type="checkbox" checked disabled>
+                                            {% else %}
+                                                <input class="form-check-input" type="checkbox" disabled>
+                                            {% endif %}
+                                        </p>
+                                        <p class="col card-text">S: 
+                                            {% if menu.sabado %}
+                                                <input class="form-check-input" type="checkbox" checked disabled>
+                                            {% else %}
+                                                <input class="form-check-input" type="checkbox" disabled>
+                                            {% endif %}
+                                        </p>
+                                        <p class="col card-text">D: 
+                                            {% if menu.domingo %}
+                                                <input class="form-check-input" type="checkbox" checked disabled>
+                                            {% else %}
+                                                <input class="form-check-input" type="checkbox" disabled>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <a href="{% url 'menus:editar_menu' menu.id %}" class="btn btn-outline-warning mt-4 me-3">
+                                        <span>Editar</span>
+                                    </a>
+                                    <a href="{% url 'menus:eliminar_menu' menu.id %}" class="btn btn-outline-danger mt-4 me-3">
+                                        <span>Eliminar</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+            {% else %}
+                <p>No hay menús creados</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+    </div>
+</main>
+{% endblock  %}

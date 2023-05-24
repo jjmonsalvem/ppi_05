@@ -1,0 +1,40 @@
+{% extends 'clientes/index.html' %}
+{% load static %}
+
+{% block content_clientes %}
+
+    <div class="container mt-2">
+        <div class="col-md-4 offset-md-3 mt-5">
+            <form action="{% url 'clientes:venta' %}" method="POST" class="card card-body">
+                {% csrf_token %}
+                {{formulario_venta.as_table}}
+                <label for="tiquetera_select" class="form-label">Seleccionar Tiquetera</label>
+                <select name="tiquetera_select" id="tiquetera_select" class="form-select form-select-lg mb-3" required>
+                    {% for tiquetera in tiqueteras %}
+                        <option value="{{tiquetera.id}}">Tiquetera {{ forloop.counter }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Comprar" class="btn btn-lg btn-outline-warning mt-3 me-2">
+            </form>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row row-cols-5 mt-2 gy-2">
+            {% if tiqueteras %}
+                    {% for tiquetera in tiqueteras %}
+                        <div class="col">
+                            <div class="card" style="width: 14rem">
+                                <div class="card-body">
+                                    <h3 class="card-title text-center">Tiquetera {{ forloop.counter }}</h3>
+                                    <h4 class="card-title mt-3 mb-3">Tiquetes: {{ tiquetera.cantidad }}</h4>
+                                    <p>Precio: $ {{ tiquetera.precio }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+            {% else %}
+                <p>No hay menús creados</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock  %}

@@ -1,0 +1,17 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <div class="principal">
+        <div class="principal__texto">
+            <h1>Bienvenido a FoodTicket</h1>
+            <p>Tu asistente para restaurante</p>
+        </div>
+        <div class="principal__imagen">
+            <figure>
+                <img src="{% static 'home/images/principal_icon.png' %}" alt="Icono plato">
+            </figure>
+        </div>
+    </div>
+</main>
+{% endblock  %}

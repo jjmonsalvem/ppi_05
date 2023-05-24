@@ -1,0 +1,45 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <div class="container mt-5">
+        <div class="mt-3">
+            <h1>Historial</h1>
+            <table class="table table-bordered border-warning mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Menu</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">cliente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidos %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ pedido.fecha }}</td>
+                        <td>
+                            <ul class="list-group list-group-flush">
+                                {% for menu_pedido in pedido.menupedido_set.all %}
+                                    <li class="list-group-item">{{ menu_pedido.id_menu.nombre }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group list-group-flush">
+                                {% for menu_pedido in pedido.menupedido_set.all %}
+                                    <li class="list-group-item">{{ menu_pedido.cantidad }}</li>
+                                {% endfor %}
+                            </ul>
+                        <td>{{ pedido.id_cliente.cedula }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+{% endblock  %}

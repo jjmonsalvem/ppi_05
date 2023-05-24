@@ -1,0 +1,43 @@
+{% extends 'clientes/index.html' %}
+
+{% load static %}
+
+{% block content_clientes %}
+<div class="container mt-5">
+    <div class="col-md-6 offset-md-3 mt-5">
+        {{error}}
+        <form action="{% url 'clientes:seleccionar_tiquetera' cliente.id %}" method="POST" class="card card-body">
+        {% csrf_token %}
+            <label for="cedula" class="form-label">cedula: </label>
+            <input type="text" name="cedula" id="cedula" class="form-control" disabled value={{ cliente.cedula }}>
+            <table class="table table-bordered border-warning table-striped table-hover mt-3">
+                <thead>
+                    <th scope="col">Tiquetera</th>
+                    <th scope="col">Tiquetes<br>Totales</th>
+                    <th scope="col">Tiquetes<br>Redimidos</th>
+                </thead>
+                <tbody>
+                    {% for tiquetera in tiqueteras %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ tiquetera.cantidad }}</td>
+                            <td>{{ tiquetera.redimidos }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <label for="tiquetera_select" class="form-label">Tiquetera: </label>
+            <select name="tiquetera_select" id="tiquetera_select" class="form-select form-select-lg mb-3" required>
+                {% for tiquetera in tiqueteras %}
+                    <option value="{{tiquetera.id}}">Tiquetera {{ forloop.counter }}</option>
+                {% endfor %}
+            </select>
+            <label for="cantidad" class="form-label">cantidad: </label>
+            <input type="number" name="cantidad" id="cantidad" class="form-control" required>
+
+            <button type="submit" class="btn btn-lg btn-outline-warning mt-5">Seleccionar</button>
+        </form>
+    </div>
+</div>
+
+{% endblock  %}

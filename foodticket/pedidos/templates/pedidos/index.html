@@ -1,0 +1,11 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <div class="container mt-5">
+        <h1>Pedidos</h1>
+        <a href="{% url 'pedidos:historial' %}" class="btn btn-lg btn-outline-warning mt-3">Historial</a>
+    </div>
+</main>
+{% endblock  %}
