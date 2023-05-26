@@ -15,6 +15,7 @@ El objetivo de este proyecto es proporcionar una aplicación que permita a los r
 ### Integrantes
 
 - **Juan José Monsalve Marín**
+- **Juan José Alzate Rojas**
 
 ### Para la probar la aplicación
 [FoodTicket](http://gibsygg.pythonanywhere.com)
