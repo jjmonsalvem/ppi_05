@@ -18,4 +18,4 @@ El objetivo de este proyecto es proporcionar una aplicación que permita a los r
 - **Juan José Alzate Rojas**
 
 ### Para la probar la aplicación
-[FoodTicket](http://gibsygg.pythonanywhere.com)
+[FoodTicket](http://jjmonsalvem.pythonanywhere.com/)
