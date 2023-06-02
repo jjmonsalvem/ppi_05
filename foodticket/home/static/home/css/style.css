@@ -118,6 +118,14 @@ main{
 
 /*Estilos para el home*/
 
+.footer{
+  padding: 1em 0;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 55%;
+}
+
 .principal{
     display: flex;
     align-items: start;
