@@ -211,3 +211,140 @@ main{
   }
 
   /* alternativo
+  :root {
+  --orange: #ff7f00;
+  --black: rgb(0, 0, 0);
+  --black2: rgb(64, 65, 68);
+  --black3: rgb(31, 31, 31);
+  --white: rgb(255, 255, 255);
+  --white2: rgb(230, 230, 230);
+  --gray: rgb(180, 180, 180);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  background: var(--white2);
+  background: linear-gradient(
+      138deg,
+      var(--white2) 50%,
+      var(--orange) 50%,
+      var(--orange) 100%
+    )
+    no-repeat;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  height: 100vh;
+}
+
+body {
+  display: flex;
+  justify-content: space-between;
+  color: var(--black);
+}
+
+main {
+  width: 80vw;
+  height: 100vh;
+}
+
+
+.nav-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20vw;
+  height: 100vh;
+  background-color: var(--white);
+}
+
+.nav-sidebar__logo {
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.nav-sidebar__menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  height: 50%;
+  list-style: none;
+  padding: 20px 50px 50px 15px;
+}
+
+.nav-sidebar__login {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: start;
+  height: 30%;
+  list-style: none;
+  padding: 50px 50px 50px 15px;
+}
+
+.nav-sidebar__menu__item {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  height: 55px;
+  margin: 10px 0;
+  border-radius: 15px;
+  font-size: 2.4rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.nav-sidebar__menu__item__link {
+  text-decoration: none;
+  color: var(--black2);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-align: start;
+}
+
+.nav-sidebar__menu__item__link p {
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+  padding: 15px 0;
+}
+
+.nav-sidebar__menu__item img {
+  width: 30px;
+  height: 30px;
+}
+
+.nav-sidebar__menu__item:hover {
+  border: var(--orange) 2px solid;
+}
+
+.selected {
+  border: var(--orange) 2px solid;
+}
+
+
+.principal {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  height: 100%;
+  padding: 4% 8%;
+}
+
+.principal__imagen {
+  padding-top: 120px;
+}
+
+.principal__texto h1 {
+  font-size: 8.4rem;
+  font-weight
+
+  /* alternativo
