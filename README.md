@@ -16,6 +16,7 @@ El objetivo de este proyecto es proporcionar una aplicación que permita a los r
 
 - **Juan José Monsalve Marín**
 - **Juan José Alzate Rojas**
+- **Cristian Esneider Imbacuan Mena**
 
 ### Para la probar la aplicación
 [FoodTicket](http://jjmonsalvem.pythonanywhere.com/)
