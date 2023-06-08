@@ -69,3 +69,49 @@ def iniciar_sesion(request):
             return redirect("restaurantes:index")
         else:
             return render(request, "home/login.html", {"error": "El usuario o la contraseña son incorrectos"})
+
+'''
+
+
+def registrarse(request):
+Esta vista se encarga de registrar un usuario y un restaurante asociado a ese usuario"""
+
+    if request.method == "GET":
+        return render(request, "home/registrarse.html")
+    else:
+        username = request.POST.get("username")
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
+        email = request.POST.get("correo")
+        nombre_restaurante = request.POST.get("nombre_restaurante")
+        nit_restaurante = request.POST.get("nit_restaurante")
+        direccion_restaurante = request.POST.get("direccion_restaurante")
+        telefono_restaurante = request.POST.get("telefono_restaurante")
+        tipo_restaurante = request.POST.get("tipo_restaurante")
+
+        if password1 == password2:
+            try:
+                # Creamos el usuario
+                user = User.objects.create_user(username=username, password=password1, email=email)
+
+                # Logeamos al usuario creando la sesión
+                # login(request, user)  # Si deseas iniciar sesión automáticamente
+
+                # Creamos el restaurante de ese usuario
+                restaurante = RestauranteUsuario.objects.create(
+                    nombre=nombre_restaurante,
+                    NIT=nit_restaurante,
+                    direccion=direccion_restaurante,
+                    telefono=telefono_restaurante,
+                    tipo=tipo_restaurante,
+                    usuario=user
+                )
+
+                return redirect("restaurantes:index")
+            
+            except IntegrityError:
+                return render(request, "home/registrarse.html", {"error": "El nombre de usuario ya existe"})
+        
+        else:
+            return render(request, "home/registrarse.html", {"error": "Las contraseñas no coinciden"})
+'''
