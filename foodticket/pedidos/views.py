@@ -21,3 +21,14 @@ def Historial(request):
 
 # TODO: Implementar vista para la revisión de pedidos pendientes en caso de que se llegue a necesitar o una vista
 # para revisar el historial de tiqueteras compradas
+
+'''
+
+@login_required
+def PedidosPendientes(request):
+    """Vista para la revisión de pedidos pendientes"""
+    restaurante = RestauranteUsuario.objects.get(usuario=request.user)
+    pedidos_pendientes = Pedido.objects.prefetch_related('menupedido_set__id_menu').filter(id_restaurante=restaurante, estado='pendiente').order_by('-fecha')
+    return render(request, "pedidos/pendientes.html", {"pedidos_pendientes": pedidos_pendientes})
+    
+'''
