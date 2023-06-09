@@ -225,3 +225,17 @@ def informacion_cliente(request, cliente_id):
     else:
         return render(request, "clientes/seleccionTiquetera.html",
                         {"tiqueteras": tiqueteras, "cliente": cliente})"""
+    
+
+
+
+'''
+
+@login_required
+def ver_tiqueteras(request):
+    """Vista para que el cliente pueda ver sus tiqueteras"""
+    cliente = Cliente.objects.get(usuario=request.user)
+    tiqueteras = Tiquetera.objects.filter(id_cliente=cliente)
+    return render(request, "clientes/ver_tiqueteras.html", {"tiqueteras": tiqueteras})
+    
+'''
