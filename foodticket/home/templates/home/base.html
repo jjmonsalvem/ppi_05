@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -70,14 +71,6 @@
                         <p>Pedidos</p>
                     </a>
                 </li>
-                <li class="nav-sidebar__menu__item">
-                    <a href="{% url 'home:credits' %}" class="nav-sidebar__menu__item__link">
-                        <figure>
-                            <img src="{% static 'home/images/pedidos.png' %}" alt="Icono creditos" width=30 height=30>
-                        </figure>
-                        <p>Créditos</p>
-                    </a>
-                </li>
 
             </ul>
             <ul class="nav-sidebar__login">
@@ -109,8 +102,18 @@
                 </li>
                 {% endif %}
             </ul>
+
+            <!-- Creditos autores y quienes aportaron -->
+                <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                    <p class="copyright text-muted">Copyright &copy; 2023 · Juan José Monsalve Marín · Juan José Alzate · Juan Camilo Valencia Hicapie (creditos)</p>
+                    <p class="copyright text-muted">Universidad Nacional de Colombia · Medellín </p>
+                    </div>
+                </div>
+                </div>
+            </header>
         </nav>
-    </header>
 
     {% block content %}
     {% endblock  %}
