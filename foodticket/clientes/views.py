@@ -228,7 +228,6 @@ def informacion_cliente(request, cliente_id):
     
 
 
-
 '''
 
 @login_required
@@ -236,6 +235,22 @@ def ver_tiqueteras(request):
     """Vista para que el cliente pueda ver sus tiqueteras"""
     cliente = Cliente.objects.get(usuario=request.user)
     tiqueteras = Tiquetera.objects.filter(id_cliente=cliente)
-    return render(request, "clientes/ver_tiqueteras.html", {"tiqueteras": tiqueteras})
-    
+
+    tiqueteras_info = []
+    for tiquetera in tiqueteras:
+        # Obtener información adicional relacionada con cada tiquetera
+        detalles = DetalleTiquetera.objects.filter(tiquetera=tiquetera)
+        total_tickets = sum([detalle.cantidad for detalle in detalles])
+
+        # Crear un diccionario con la información de la tiquetera
+        tiquetera_info = {
+            'tiquetera': tiquetera,
+            'detalles': detalles,
+            'total_tickets': total_tickets
+        }
+
+        tiqueteras_info.append(tiquetera_info)
+
+    return render(request, "clientes/ver_tiqueteras.html", {"tiqueteras_info": tiqueteras_info})
+
 '''
