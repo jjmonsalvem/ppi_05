@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from .forms import FormularioVentaTiquetera,FormularioVentaAlmuerzo, ClienteForm
+from .forms import FormularioVentaTiquetera,FormularioVentaAlmuerzo
 from .models import Cliente, Tiquetera
 from restaurantes.models import RestauranteUsuario, TiqueteraVenta
 from pedidos.models import Pedido, MenuPedido
@@ -225,7 +225,7 @@ def informacion_cliente(request, cliente_id):
     else:
         return render(request, "clientes/seleccionTiquetera.html",
                         {"tiqueteras": tiqueteras, "cliente": cliente})"""
-    
+
 
 
 '''

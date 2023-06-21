@@ -12,3 +12,7 @@ class Tiquetera(models.Model):
     redimidos = models.IntegerField(default=0)
     id_restaurante = models.ForeignKey(RestauranteUsuario, on_delete=models.CASCADE)
     id_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+
+    @property
+    def diferencia(self):
+        return self.cantidad - self.redimidos

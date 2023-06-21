@@ -15,6 +15,7 @@
                     <th scope="col">Tiquetera</th>
                     <th scope="col">Tiquetes<br>Totales</th>
                     <th scope="col">Tiquetes<br>Redimidos</th>
+                    <th scope="col">Tiquetes<br>Restantes</th>
                 </thead>
                 <tbody>
                     {% for tiquetera in tiqueteras %}
@@ -22,6 +23,7 @@
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ tiquetera.cantidad }}</td>
                             <td>{{ tiquetera.redimidos }}</td>
+                            <td>{{ tiquetera.diferencia }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
