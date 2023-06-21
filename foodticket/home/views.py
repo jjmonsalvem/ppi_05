@@ -21,7 +21,7 @@ def registrarse(request):
         return render(request, "home/registrarse.html")
     else:
         if request.POST["password1"] == request.POST["password2"]:
-            try:                            
+            try:
                 # Creamos el usuario
                 username = request.POST["username"]
                 password = request.POST["password1"]
@@ -41,7 +41,7 @@ def registrarse(request):
                 restaurante = RestauranteUsuario.objects.create(nombre=nombre_restaurante, NIT=nit_restaurante, direccion=direccion_restaurante, telefono=telefono_restaurante, tipo=tipo_restaurante, usuario=user)
                 restaurante.save()
                 return redirect("restaurantes:index")
-            
+
             except IntegrityError:
                 return render(request, "home/registrarse.html", {"error": "El nombre de usuario ya existe"})
         else:
@@ -52,6 +52,10 @@ def cerrar_sesion(request):
     """Esta view se encarga de cerrar la sesión del usuario y redireccionar a la página de inicio"""
     logout(request)
     return redirect("home:index")
+
+def tratamiento_de_datos(request):
+    """politica de tratamiento de datos"""
+    return render(request, "home/tratamiento_datos.html")
 
 
 def iniciar_sesion(request):
@@ -108,10 +112,10 @@ Esta vista se encarga de registrar un usuario y un restaurante asociado a ese us
                 )
 
                 return redirect("restaurantes:index")
-            
+
             except IntegrityError:
                 return render(request, "home/registrarse.html", {"error": "El nombre de usuario ya existe"})
-        
+
         else:
             return render(request, "home/registrarse.html", {"error": "Las contraseñas no coinciden"})
 '''

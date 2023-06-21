@@ -10,4 +10,6 @@ urlpatterns = [
     path("registrarse/", views.registrarse, name="registrarse"),
     path("cerrar_sesion/", views.cerrar_sesion, name="cerrar_sesion"),
     path("login/", views.iniciar_sesion, name="login"),
+    path("tratamiento_datos/", views.tratamiento_de_datos, name="tratamiento_datos"),
+
 ]
