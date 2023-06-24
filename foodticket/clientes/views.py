@@ -3,11 +3,13 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from .forms import FormularioVentaTiquetera,FormularioVentaAlmuerzo
+from django.contrib import messages
+from .forms import FormularioVentaTiquetera,FormularioVentaAlmuerzo, FormularioInformacionCliente
 from .models import Cliente, Tiquetera
 from restaurantes.models import RestauranteUsuario, TiqueteraVenta
 from pedidos.models import Pedido, MenuPedido
 from menus.models import Menu
+
 
 # Create your views here.
 
@@ -158,15 +160,32 @@ def seleccionar_menu(request, cliente_id):
                         {"menus": menus, "cliente": cliente})
 
 
+def informacion_cliente(request):
+
+    cc = request.POST['cc']
+    clientes = Cliente.objects.filter(cedula=cc)
+
+    if len(clientes) == 0:
+        alerta = True
+        return render(request, "clientes/index.html", {'alerta': alerta})
+    else:
+        alerta = False
+        return render(request, 'clientes/informacion_cliente.html',
+                  {'clientes': clientes, 'alerta': alerta})
+
+
+
+
 # TODO: Al momento de vender tiqueteras sería conveniente vernder una cantidad especifica y no x cantidad
 # Tal vez reemplazar este modo de compra perimitiendo seleccionar la tiquetera previamente creada por el restaurante
 # TODO: Si se implementa lo anterior crear la view para crear tiqueteras
 # TODO: Implementar la funcionalidad para que el cliente pueda ver sus tiqueteras
 # TODO: Implementar la funcionalidad para dar almuerzos gratis por una cantidad de tiqueteras redimidas si el restaurante lo desea
 
-def informacion_cliente(request, cliente_id):
 
-    formulario = FormularioVentaAlmuerzo()
+def informacion_cliente_____________(request, cliente_id):
+
+    formulario = FormularioInformacionCliente()
     restaurante = RestauranteUsuario.objects.get(usuario=request.user)
 
     if request.method == 'POST':
@@ -177,80 +196,15 @@ def informacion_cliente(request, cliente_id):
             if tiqueteras.count() == 0:
                 return render(request, "clientes/compra.html",
                             {"error": "El cliente no tiene tiqueteras",
-                            "formulario_compra": formulario}
+                            "formulario_inf": formulario}
                             )
             return redirect("clientes:seleccionar_tiquetera", cliente_id=cliente.id)
 
         except ObjectDoesNotExist:
             return render(request, "clientes/compra.html",
                             {"error": "El cliente no tiene tiqueteras",
-                            "formulario_compra": formulario}
+                            "formulario_inf": formulario}
                             )
 
     else:
-        return render(request, "clientes/compra.html", {"formulario_compra": formulario})
-
-
-
-
-
-
-
-    """restaurante = RestauranteUsuario.objects.get(usuario=request.user)
-    tiqueteras = Tiquetera.objects.filter(id_restaurante = restaurante, id_cliente = cliente_id)
-    cliente = Cliente.objects.get(id=cliente_id)
-
-    if request.method == 'POST':
-            tiquetera = Tiquetera.objects.get(pk=request.POST.get("tiquetera_select"), id_restaurante = restaurante, id_cliente = cliente)
-
-            # Se debe validar que la cantidad de tiquetes sea suficiente
-            if tiquetera.cantidad - tiquetera.redimidos >= int(request.POST.get("cantidad")):
-                tiquetera.redimidos += int(request.POST.get("cantidad"))
-
-                # Si se iguala la cantidad de tiquetes a la cantidad de tiquetes redimidos se debe eliminar la tiquetera
-                if tiquetera.cantidad == tiquetera.redimidos:
-                    tiquetera.delete()
-                else:
-                    tiquetera.save()
-            else:
-                return render(request, "clientes/seleccionTiquetera.html",
-                            {"error": "No hay suficientes tiquetes para realizar la compra",
-                            "tiqueteras": tiqueteras, "cliente": cliente}
-                            )
-
-            return render(request, "clientes/seleccionMenu.html",{
-                "cliente": cliente, "menus": restaurante.menu_set.all(),
-                "cantidad": [i for i in range(int(request.POST.get("cantidad")))]
-                })
-    else:
-        return render(request, "clientes/seleccionTiquetera.html",
-                        {"tiqueteras": tiqueteras, "cliente": cliente})"""
-
-
-
-'''
-
-@login_required
-def ver_tiqueteras(request):
-    """Vista para que el cliente pueda ver sus tiqueteras"""
-    cliente = Cliente.objects.get(usuario=request.user)
-    tiqueteras = Tiquetera.objects.filter(id_cliente=cliente)
-
-    tiqueteras_info = []
-    for tiquetera in tiqueteras:
-        # Obtener información adicional relacionada con cada tiquetera
-        detalles = DetalleTiquetera.objects.filter(tiquetera=tiquetera)
-        total_tickets = sum([detalle.cantidad for detalle in detalles])
-
-        # Crear un diccionario con la información de la tiquetera
-        tiquetera_info = {
-            'tiquetera': tiquetera,
-            'detalles': detalles,
-            'total_tickets': total_tickets
-        }
-
-        tiqueteras_info.append(tiquetera_info)
-
-    return render(request, "clientes/ver_tiqueteras.html", {"tiqueteras_info": tiqueteras_info})
-
-'''
+        return render(request, "clientes/compra.html", {"formulario_inf": formulario})

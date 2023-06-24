@@ -19,14 +19,20 @@
             <div class="mt-5">
                 <h1>Clientes</h1>
 
-                <form action="{% url 'clientes:informacion_cliente' %}" method="POST" class="card card-body">
-                    {% csrf_token %}
-                    {{formulario_compra.as_p}}
+                <form action="{% url 'clientes:informacion_cliente' %}" method="POST" class="card card-body"> {% csrf_token %}
+                    <input type="text" id="cc" name="cc" required minlength="6" maxlength="15" size="10">
                     <input type="submit" value="Seleccionar" class="btn btn-lg btn-outline-warning mt-3 me-2">
                 </form>
 
             </div>
         </div>
+    {% endif %}
+    {% if alerta %}
+        <script>
+            window.onload = function() {
+                alert("Usuario no encontrado");
+            };
+        </script>
     {% endif %}
 </main>
 {% endblock content %}

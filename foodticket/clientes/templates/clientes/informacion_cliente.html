@@ -1,0 +1,40 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <div class="container mt-5">
+        <div class="mt-3">
+            <h2>Información del Cliente</h2>
+            {% for cliente in clientes %}
+                <h1>Nombre cliente: {{ cliente.nombre }}</h1>
+                <h1>Cedula cliente: {{ cliente.cedula }}</h1>
+            {% endfor %}
+            <table class="table table-bordered border-warning mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">Restaurante</th>
+                    <th scope="col">Dirección restaurante</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Tipo de comida</th>
+                    <th scope="col">Almuerzos disponibles</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for cliente in clientes %}
+                    {% for tiquetera in cliente.tiquetera_set.all %}
+                    <tr>
+                        <td>{{ tiquetera.id_restaurante.nombre }}</td>
+                        <td>{{ tiquetera.id_restaurante.direccion }}</td>
+                        <td>{{ tiquetera.id_restaurante.telefono }}</td>
+                        <td>{{ tiquetera.id_restaurante.tipo }}</td>
+                        <td>{{ tiquetera.diferencia }}</td>
+                    </tr>
+                    {% endfor %}
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+</main>
+{% endblock content %}
